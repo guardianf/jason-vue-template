@@ -1,11 +1,11 @@
 const path = require('path');
-const packagejson = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const sass = require('sass');
 
 module.exports = {
   entry: {
-    vendor: Object.keys(packagejson.dependencies),
+    vendor: ['element-ui', 'vue'],
     index: path.resolve(__dirname, 'src/index.js'),
   },
   module: {
@@ -18,8 +18,8 @@ module.exports = {
         use: ['style-loader', 'css-loader', {
           loader: 'sass-loader',
           options: {
-            implementation: require('sass')
-          }
+            implementation: sass,
+          },
         }],
 
       }, {
@@ -33,8 +33,8 @@ module.exports = {
       }, {
         test: /\.vue$/,
         loader: ['vue-loader'],
-        exclude: /node_modules/
-      }
+        exclude: /node_modules/,
+      },
     ],
   },
   plugins: [
